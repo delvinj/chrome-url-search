@@ -1,0 +1,83 @@
+/* :noTabs=false:mode=css:tabSize=2:indentSize=2:folding=none: */
+body {
+	margin: 0;
+	padding: 2px 0;
+}
+body, html { overflow: hidden; }
+body, input, select {
+	font: normal 11px/13px 'segoe ui'; 
+}
+select {
+	border: none;
+	font: normal 13px/25px 'segoe ui';
+	width: 760px;
+	height: 560px;
+	overflow-x: hidden;
+	-webkit-user-select: none;
+}
+select:focus {
+	outline: none;
+}
+select > * {
+	display: block;
+}
+div[role=listitem] {
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	cursor: pointer;
+}
+div[role=listitem] h3 {
+	margin: 2px;
+	line-height: 20px;
+	padding-left: 20px;
+}
+div[role=listitem]:hover {
+	outline: auto 1px hsl(214, 91%, 65%);
+	outline-offset: 5px;
+	background-color: hsl(214, 91%, 87%);
+	background-image: -webkit-linear-gradient(
+		 hsla(0, 100%, 100%, 0.8), 
+		 hsla(0, 100%, 100%, 0)
+	);
+}
+div[role=listitem] > a {
+	color: #000;
+	text-decoration: none;
+}
+div[role=listitem] > a > p {
+	display: none;
+}
+list > div > a > h3 { 
+	width: 700px;
+	display: block;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+#controls {
+	width: 100%;
+}
+#controls input {
+	width: 80%;
+	border: none;
+	padding: 2px;
+}
+#controls input:focus {
+	outline: none;
+}
+.slide {
+	width: 760px; 
+}
+#other-slide list {
+	display: block; 
+}
+#other-slide list > h3 {
+	white-space: nowrap;
+}
+.slide {
+	display: none;
+}
+.slide.visible {
+	display: block;
+}
+li { list-style-type: none; }

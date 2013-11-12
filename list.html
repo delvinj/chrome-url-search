@@ -1,0 +1,50 @@
+<!-- :noTabs=false:mode=html:tabSize=2:indentSize=2:folding=none: -->
+<!DOCTYPE html>
+
+<html>
+<head>
+	<meta charset="utf-8" />
+	<link type="text/css" rel="stylesheet" href="list.css" />
+	<script src="HistoryController.js"></script>
+	<script src="keyCode.js"></script>
+	<script src="list.js"></script>
+</head>
+<body>
+	<div id="container">
+		<div id="controls">
+			<input type="text" value="" id="q" />
+		</div>
+		<div id="list-slide" class="slide">
+			<div id="padding">
+				<select multiple="multiple" id="item-list"></select>
+			</div>
+		</div>
+		<div class="slide visible" id="data-slide">
+			<list>
+				<div role="listitem">
+					<h3>List Item</h3>
+				</div>
+				<div role="listitem">
+					<h3>List Item</h3>
+				</div>
+				<div role="listitem">
+					<h3>List Item</h3>
+				</div>
+			</list>
+		</div>
+		<div id="other-slide" class="slide">
+			<list>
+				<div role="listitem">
+					<h3>List Item</h3>
+				</div>
+				<div role="listitem">
+					<h3>List Item</h3>
+				</div>
+				<div role="listitem">
+					<h3>List Item</h3>
+				</div>
+			</list>
+		</div>
+	</div>
+</body>
+</html>
