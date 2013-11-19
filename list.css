@@ -1,25 +1,9 @@
 /* :noTabs=false:mode=css:tabSize=2:indentSize=2:folding=none: */
-body {
-	margin: 0;
-	padding: 2px 0;
-}
+body { margin: 0; padding: 2px 0; }
 body, html { overflow: hidden; }
-body, input, select {
-	font: normal 11px/13px 'segoe ui'; 
-}
-select {
-	border: none;
-	font: normal 13px/25px 'segoe ui';
-	width: 760px;
-	height: 560px;
-	overflow-x: hidden;
-	-webkit-user-select: none;
-}
-select:focus {
-	outline: none;
-}
-select > * {
-	display: block;
+body, input, h3 { 
+	/*font: normal 11px/13px 'segoe ui';*/
+	font: normal 10px/13px 'Source Sans Pro', sans-serif;
 }
 div[role=listitem] {
 	overflow: hidden;
@@ -32,7 +16,12 @@ div[role=listitem] h3 {
 	line-height: 20px;
 	padding-left: 20px;
 }
-div[role=listitem]:hover {
+div.show-more[role=listitem] > a > h3 {
+	color: #9999ff;
+	font-style: italic;
+}
+div[role=listitem]:hover,
+div.selected[role=listitem] {
 	outline: auto 1px hsl(214, 91%, 65%);
 	outline-offset: 5px;
 	background-color: hsl(214, 91%, 87%);

@@ -1,4 +1,4 @@
-// :noTabs=false:mode=javascript:tabSize=2:indentSize=2:folding=indent:
+// :noTabs=true:mode=javascript:tabSize=2:indentSize=2:folding=indent:
 
 var millisPerYear = 31536000000;
 
@@ -13,20 +13,23 @@ var millisPerYear = 31536000000;
 function HistoryController() {
 	"use strict";
 	
+	// private state
 	var items = [];
 	var filter = false; 
 	var visible = false;
 	
 	Object.defineProperties(this, {
-		
+    /**
+     * Computes the visible items. An item is visible if it matches
+     * the filter, or if the filter is null.
+     */
 		"items": {
 			enumerable: true,
-			
-			// computes the visible (non-filtered) items on-demand.
-			// returns a copy of the data, so feel free to modify it
+			configurable: false,
 			get: function() {
-				if (visible) 
+				if (visible) {
 					return [].concat(visible);
+				}
 				if (filter) {
 					// filtered copy
 					visible = items.filter(function(i) {
@@ -39,21 +42,24 @@ function HistoryController() {
 				return [].concat(visible);
 			}
 		},
-		
-		// Items that match the filter string are shown. All others are hidden.
-		// Set to null or false to show all items.
+		/**
+     * Filter for calculating visible items. Set to null to show all.
+     */
 		"filter": {
 			enumerable: true,
+			configurable: false,
 			get: function() { return filter; },
 			set: function(str) {
 				visible = false;
 				filter = str;
 			}
 		},
-		
+		/**
+     * One-time dataset load.
+     */
 		"load": {
 			enumerable: true,
-			// Load history elements from chrome.
+			configurable: false,
 			value: function(oncomplete) {
 				var self = this;
 				chrome.history.search({
