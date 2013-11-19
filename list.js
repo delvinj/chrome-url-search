@@ -1,13 +1,13 @@
 // :noTabs=true:mode=javascript:tabSize=2:indentSize=2:folding=indent:
 
 (function() {
-	"use strict";
+  "use strict";
 
-	var input, historyController;
-	var overflowItems = [];
-	
-	function createListItem(dataItem) {
-	  var item = document.createElement("div");
+  var input, historyController;
+  var overflowItems = [];
+  
+  function createListItem(dataItem) {
+    var item = document.createElement("div");
     item.setAttribute("role", "listitem");
     
     var anchor = item.appendChild(document.createElement("a"));
@@ -20,22 +20,22 @@
     detail.innerHTML = dataItem.title + "<br />" + dataItem.lastVisitTime;
     
     return item;
-	}
-	
-	var updateView = function() {
-		var items = this.items;
-		var len = items.length;
-		
-		var frag = document.createDocumentFragment();
-		
-		for (var j=0; j < len; ++j) {
-		  
-			var item = createListItem(items[j]);
-			frag.appendChild(item);
-			
-			if (j >= 150) {
-			  // Stop at 150 for now. If you want more, feel free to change this value.
-			  // In the future I will make this configurable, or a "click to see more".
+  }
+  
+  var updateView = function() {
+    var items = this.items;
+    var len = items.length;
+    
+    var frag = document.createDocumentFragment();
+    
+    for (var j=0; j < len; ++j) {
+      
+      var item = createListItem(items[j]);
+      frag.appendChild(item);
+      
+      if (j >= 150) {
+        // Stop at 150 for now. If you want more, feel free to change this value.
+        // In the future I will make this configurable, or a "click to see more".
 
         var moreResults = document.createElement("div");
         moreResults.setAttribute("role", "listitem");
@@ -45,71 +45,71 @@
         frag.appendChild(moreResults);
         
         overflowItems = items.slice(j);
-				break;
-			}
-		}
-		
-		var list = document.querySelector("#data-slide > list");
-		list.innerHTML = null;
-		list.appendChild(frag);
-	};
-	
-	/**
+        break;
+      }
+    }
+    
+    var list = document.querySelector("#data-slide > list");
+    list.innerHTML = null;
+    list.appendChild(frag);
+  };
+  
+  /**
    * Setup the input filter timer.
    */
-	function initFilter() {
-		var timerId = 0;
-		
-		var timerAction = function() {
-			historyController.filter = input.value;
-			updateView.call(historyController);
-		};
-		
-		var resetTimer = function() {
-			clearTimeout(timerId);
-			timerId = setTimeout(timerAction, 300);
-		};
-		
-		var keydown = function(ev) {
-		  // TODO:
-		  // UP and DOWN should change the selected list item, just like
-		  // the omnibox
-			if (ev.keyCode === keyCode.DOWN) {
-				ev.preventDefault();
-			} else if (ev.keyCode === keyCode.UP) {
-				ev.preventDefault();
-			} else if (ev.keyCode === keyCode.TAB) {
-				ev.preventDefault();
-			} else {
-				resetTimer();
-			}
-		};
-		input.addEventListener("keydown", keydown, false);
-		input.focus();
-	}
-	
-	function getAnchorForTarget(ev) {
-	  var listitem = util.ancestorOrSelf(ev.target, "div[role=listitem]");
-	  if (listitem) {
-	    return listitem.querySelector("a").href;
-	  } else {
-	    (window.console && console.error && console.error("getAnchorForTarget: null", ev));
-	  }
-	  return null;
-	}
-	
-	var escapeHook = function(ev) {
-		if (ev.keyCode === keyCode.ESCAPE) {
-			if (input.value != "") {
-				input.value = "";
-				input.focus();
-				ev.preventDefault();
-			}
-		}
-	};
-	
-	document.addEventListener("click", 
-	  function(ev) {
+  function initFilter() {
+    var timerId = 0;
+    
+    var timerAction = function() {
+      historyController.filter = input.value;
+      updateView.call(historyController);
+    };
+    
+    var resetTimer = function() {
+      clearTimeout(timerId);
+      timerId = setTimeout(timerAction, 300);
+    };
+    
+    var keydown = function(ev) {
+      // TODO:
+      // UP and DOWN should change the selected list item, just like
+      // the omnibox
+      if (ev.keyCode === keyCode.DOWN) {
+        ev.preventDefault();
+      } else if (ev.keyCode === keyCode.UP) {
+        ev.preventDefault();
+      } else if (ev.keyCode === keyCode.TAB) {
+        ev.preventDefault();
+      } else {
+        resetTimer();
+      }
+    };
+    input.addEventListener("keydown", keydown, false);
+    input.focus();
+  }
+  
+  function getAnchorForTarget(ev) {
+    var listitem = util.ancestorOrSelf(ev.target, "div[role=listitem]");
+    if (listitem) {
+      return listitem.querySelector("a").href;
+    } else {
+      (window.console && console.error && console.error("getAnchorForTarget: null", ev));
+    }
+    return null;
+  }
+  
+  var escapeHook = function(ev) {
+    if (ev.keyCode === keyCode.ESCAPE) {
+      if (input.value != "") {
+        input.value = "";
+        input.focus();
+        ev.preventDefault();
+      }
+    }
+  };
+  
+  document.addEventListener("click", 
+    function(ev) {
       var href = getAnchorForTarget(ev);
       if (!href) {
         return;
@@ -122,9 +122,9 @@
         window.close();
       }
     });
-	
-	window.addEventListener("load", 
-	  function() {
+  
+  window.addEventListener("load", 
+    function() {
       input = document.querySelector("#q");
       document.body.addEventListener("keydown", escapeHook, false);
       

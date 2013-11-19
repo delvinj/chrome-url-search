@@ -32,11 +32,11 @@ var util = {
   },
   linkToNewTab: function(url, callback) {
     chrome.tabs.create({ 
-			url: url
-		}, function() {
-		  if (callback) {
-		    callback.apply(window, arguments);
-		  }
+      url: url
+    }, function() {
+      if (callback) {
+        callback.apply(window, arguments);
+      }
     });
   },
   linkToLastActiveTab: function(url) {
