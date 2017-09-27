@@ -20,11 +20,8 @@ window.addEventListener("load", function() {
   window.addEventListener("keydown", function(ev) {
     if (ev.keyCode == 68 && ev.altKey) {
       // alt-d: toggle display mode
-      ev.preventDefault();
-      return false;
     }
     if (ev.keyCode == 27) {
-      // clear filter text on first escape
       if (filterTxt.value) {
         ev.preventDefault();
         filterTxt.value = "";
@@ -57,7 +54,8 @@ window.addEventListener("load", function() {
       case keyCode.UP:
       case keyCode.DOWN:
         ev.preventDefault();
-        return move(ev.keyCode);
+        move(ev.keyCode);
+        return;
     }
     clearTimeout(timerId);
     timerId = setTimeout(update, 400);
@@ -68,12 +66,10 @@ window.addEventListener("load", function() {
     e.preventDefault();
     
     var t = e.target;
-    
-    if (t.nodeName == "SPAN") {
+    if (t.nodeName == "SPAN")
       t = t.parentNode.parentNode;
-    } else if (t.nodeName == "A") { 
+    else if (t.nodeName == "A") 
       t = t.parentNode;
-    }
     
     var url = t.getAttribute("data-url");
     
@@ -82,20 +78,59 @@ window.addEventListener("load", function() {
     });
   }
   
-  // return filtered array of history items
+  //
+  // trim whitespace
+  function trim(s) {
+    return String(s).replace(/(^\s+|\s+$)/g,"");
+  }
+  
+  // 
+  // |val| is already trimmed and lowercase
+  function stringFilter(val, key) {
+    return function(item) {
+      if (key) {
+        return String(item[key]).toLowerCase().indexOf(val) !== -1;
+      }
+      return String(item).toLowerCase().indexOf(val) !== -1;
+    };
+  }
+  
+  //
+  // return items filtered by input value.
   function applyFilter() {
-    var val = filterTxt.value;
-    if (!val.replace(/\s+/g, "")) {
+    //
+    // filter value string
+    var val = trim(filterTxt.value);
+    
+    //
+    // empty string
+    if (!val) {
       return historyItems;
-    } else {
-      // todo: also include title matches?
-      val = filterTxt.value.toLowerCase();
-      return historyItems.filter(
-        function(i) {
-          return i.url.toLowerCase().indexOf(val) != -1;
-        }
-      );
     }
+    
+    //
+    // todo: also include title matches?
+    val = val.toLowerCase();
+    
+    //
+    // support multiple "clauses"
+    if (val.indexOf('+') !== -1) {
+      //
+      // clauses are separated by '+'; empty clauses have no effect.
+      let parts = val.split(/\+/).map(trim).filter(trim);
+      let items = historyItems;
+      for (var j=0; j < parts.length; ++j) {
+        items = items.filter(stringFilter(parts[j], "url"));
+        if (items.length === 0) {
+          return [];
+        }
+      }
+      return items;
+    }
+    
+    //
+    // regular search (no clauses)
+    return historyItems.filter(stringFilter(val, "url"));
   }
   
   // build listview contents

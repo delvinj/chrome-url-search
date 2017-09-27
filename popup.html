@@ -5,14 +5,16 @@
   <meta charset="utf-8" />
   <title>chrome url search popup</title>
   <link rel="stylesheet" href="popup.css" />
+  <!-- keyCodes (from jquery UI) -->
   <script src="keyCode.js"></script>
+  <!-- simple preferences wrapper -->
   <script src="prefs.js"></script>
+  <!-- popup handler -->
   <script src="popup.js"></script>
 </head>
 <body>
   <div id="controls">
-    <label for="filter">Filter:</label>
-    <input type="text" id="filter" />
+    <input type="text" id="filter" autocomplete="0" spellcheck="0" />
   </div>
   <ul id="listview" role="list">
     <li id="listitem-template" role="listitem" data-entryid="-1" data-title="" data-url="">
