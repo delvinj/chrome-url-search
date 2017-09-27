@@ -1,15 +1,19 @@
 // :noTabs=false:mode=javascript:tabSize=2:indentSize=2:folding=none:
 {
-	"name": "chrome url search",
-	"version": "1.0",
-	"manifest_version": 2,
-	"description": "Search by URL",
-	"browser_action": {
-		"default_popup": "list.html"
-	},
-	"permissions": [
-		"history",
-		"tabs"
-	]
+  "name": "chrome url search",
+  "version": "2.0",
+  "manifest_version": 2,
+  "description": "Search by URL",
+  "browser_action": {
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "contextMenus",
+    "tabs",
+    "http://*/*",
+    "https://*/*",
+    "file://*/*",
+    "history"
+  ]
 }
 

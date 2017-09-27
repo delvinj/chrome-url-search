@@ -28,3 +28,8 @@ var keyCode = {
 	ALT: 18
 };
 
+var keyName = {};
+
+Object.keys(keyCode).forEach(function(k) {
+  keyName[keyCode[k]] = k;
+});
