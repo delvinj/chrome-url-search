@@ -3,11 +3,11 @@
 var historyItems = [];
 
 // maximum list size
-var ITEM_LIMIT = 800;
+const ITEM_LIMIT = 800;
 
 window.addEventListener("load", function() {
   
-  var filterTxt = document.getElementById("filter")
+  let filterTxt = document.getElementById("filter")
     , templateItm = document.getElementById("listitem-template")
     , timerId = -1;
     
@@ -34,7 +34,7 @@ window.addEventListener("load", function() {
   
   // @todo
   function move(command) {
-    var focusedElement = document.querySelector("*:focus");
+    let focusedElement = document.querySelector("*:focus");
     switch (command) {
       case keyCode.PAGE_DOWN:
         break;
@@ -65,13 +65,13 @@ window.addEventListener("load", function() {
   function itemclick(e) {
     e.preventDefault();
     
-    var t = e.target;
+    let t = e.target;
     if (t.nodeName == "SPAN")
       t = t.parentNode.parentNode;
     else if (t.nodeName == "A") 
       t = t.parentNode;
     
-    var url = t.getAttribute("data-url");
+    let url = t.getAttribute("data-url");
     
     chrome.tabs.create({ url:url }, function() {
       console.info(arguments);
@@ -100,7 +100,7 @@ window.addEventListener("load", function() {
   function applyFilter() {
     //
     // filter value string
-    var val = trim(filterTxt.value);
+    let val = trim(filterTxt.value);
     
     //
     // empty string
@@ -135,9 +135,9 @@ window.addEventListener("load", function() {
   
   // build listview contents
   function update() {
-    var arr = applyFilter();
-    var len = arr.length;
-    var frag = document.createDocumentFragment();
+    let arr = applyFilter();
+    let len = arr.length;
+    let frag = document.createDocumentFragment();
     
     // console.info(arr);
     for (var j=0; j < len; ++j) {
