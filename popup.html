@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>chrome url search</title>
+  <link rel="stylesheet" href="popup.css" />
+  <!-- keyCodes (from jquery UI) -->
+  <script src="keyCode.js"></script>
+  <!-- popup handler -->
+  <script src="popup.js"></script>
+</head>
+<body>
+  <div id="controls">
+    <input type="text" id="filter" autocomplete="0" spellcheck="0" />
+  </div>
+  <ul id="listview" role="list">
+    <li id="listitem-template" role="listitem" data-entryid="-1" data-title="" data-url="">
+      <a href="#">
+        <span class="icon"></span>
+        <span class="url"></span>
+        <span class="title"></span>
+        <span class="date"></span>
+      </a>
+    </li>
+  </ul>
+  <div id="statusview">
+    <input type="text" id="statustxt" readonly="1" />
+  </div>
+</body>
+</html>
